@@ -1,5 +1,6 @@
 package com.dayone.scraper;
 
+import com.dayone.exception.impl.NoTickerException;
 import com.dayone.model.Company;
 import com.dayone.model.Dividend;
 import com.dayone.model.ScrapedResult;
@@ -86,9 +87,8 @@ public class YahooFinanceScraper implements Scraper{
             String title = titleEle.text().split(" - ")[1].trim();
 
             return new Company(ticker, title);
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new NoTickerException();
         }
-        return null;
     }
 }
